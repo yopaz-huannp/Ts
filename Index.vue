@@ -64,6 +64,15 @@ const formChange = (data: CreatePostInterface) => {
                     </table>
                 </div>
             </div>
+            <nav>
+                                <ul class="pagination">    
+                                    <li v-for="link in posts.links" :key="link.id" class="page-item">
+                                        <Link v-if="link.url" :href="link.url" class="page-link" v-html="link.label"></Link>
+                                        <!-- <div v-else="" v-html="link.label"></div> -->
+                                        <li v-else=""  class="page-item"><a class="page-link" v-html="link.label"></a></li>
+                                    </li> 
+                                </ul>
+                            </nav>
         </AdminLayout>
     </div>
 </template>
