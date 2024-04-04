@@ -11,13 +11,17 @@ import { CreateCommentInterface } from '@/types/comment';
 import { Link, router } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import { ref } from 'vue';
+import swal from 'sweetalert';
+import moment from 'moment';
+import { reactive, toRefs } from 'vue';
+
 
 //define prop
 const props = defineProps({
     posts: {
         type: Object as () => {
             data: PostInterface[],
-            links:PostInterface
+            links: PostInterface
         },
         required: true
     },
@@ -31,6 +35,7 @@ const newPost = ref<CreatePostInterface>({
 const formPost = (data: CreatePostInterface) => {
     newPost.value = data;
 };
+let showCommentFlag = ref<boolean>(false);
 
 //form comment
 // const newComment = ref<CreateCommentInterface>({
@@ -40,7 +45,7 @@ const formPost = (data: CreatePostInterface) => {
 // });
 
 function getNewComment(postId: any) {
-    return <CreateCommentInterface> {
+    return <CreateCommentInterface>{
         comment: '',
         post_id: postId,
         user_id: props.user
@@ -48,25 +53,47 @@ function getNewComment(postId: any) {
 }
 
 //delete post
-function deletePost(postId:any) {
-    if (confirm('Delete Post')) {
-        router.delete(route('admin.post.destroy', postId))
-        alert('ss')
-    }
+function deletePost(postId: any) {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: [true, true],
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                router.delete(route('admin.post.destroy', postId), { preserveScroll: true })
+                swal("Good job!", "You clicked the button!", "success");
+            }
+        });
 }
 
+
+// function toggleElement() {
+//     showComment = !showComment;
+// }
 // const formComment = (data: CreateCommentInterface) => {
 //     newComment.value = data;
 // };
-/***************** Define Data *****************/
+/***************** Define Handle functions *****************/
+const toggleCommentShow = () => {
+    showCommentFlag.value = !showCommentFlag.value;
+}
+
+
+
 
 </script>
 <template>
     <div>
         <AdminLayout>
+            <!-- form post -->
             <create-post-form :url="route('admin.post.store')" @form-change="formPost" :post="newPost" />
             <div class="card">
                 <div class="card-body">
+
+                    <!-- table post -->
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -83,20 +110,24 @@ function deletePost(postId:any) {
                                     <Link :href="route('admin.post.edit', post.id)" class="btn btn-sm btn-primary mr-1">
                                     Edit
                                     </Link>
-                                    <button
-                                        class="btn btn-sm btn-danger mr-1" @click="deletePost(post.id)">
-                                    Delete
+                                    <button class="btn btn-sm btn-danger mr-1" @click="deletePost(post.id)">
+                                        Delete
                                     </button>
                                 </td>
                             </tr>
+
+                            <!-- paginate post -->
                             <ul class="pagination mt-2">
                                 <li v-for="link in posts.links" :key="link.id" class="page-item">
                                     <Link v-if="link.url" :href="link.url" class="page-link" v-html="link.label">
                                     </Link>
                                     <!-- <div v-else="" v-html="link.label"></div> -->
-                                <li style="cursor: no-drop;" v-else="" class="page-item"><a class="page-link" v-html="link.label"></a></li>
+                                <li style="cursor: no-drop;" v-else="" class="page-item"><a class="page-link"
+                                        v-html="link.label"></a></li>
                                 </li>
                             </ul>
+
+                            <!-- end paginate post -->
                         </tbody>
                     </table>
                 </div>
@@ -107,26 +138,44 @@ function deletePost(postId:any) {
                         <div class="col-md-12 col-lg-10 col-xl-8">
 
                             <!-- list post and comment -->
-                            <div scroll-region class="card overflow-y-auto" v-for="post in posts.data" :key="post.id">
+                            <div v-for="post in posts.data" :key="post.id">
                                 <div class="card-body">
                                     <div class="d-flex flex-start align-items-center">
-                                        <img class="rounded-circle shadow-1-strong me-3"
+                                        <img class="rounded-circle shadow-1-strong mr-3"
                                             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
                                             alt="avatar" width="60" height="60" />
                                         <div>
-                                            <h6 class="fw-bold text-primary mb-1">{{ post.name }}</h6>
+                                            <h3 class="fw-bold text-primary mb-1">{{ post.name }}</h3>
                                             <p class="text-muted small mb-0">
-                                                {{ post.user.name }}
+                                                {{ post.user.name }} -
+
+                                                {{ moment(post.created_at).format('L') }}
                                             </p>
                                         </div>
                                     </div>
+                                    <div class="small d-flex justify-content-start my-3">
+                                        <a class="d-flex align-items-center mr-3">
+                                            <i class="far fa-thumbs-up me-2"></i>
+                                            <p class="mb-0">Like</p>
+                                        </a>
+                                        <a style="cursor: pointer;" class="d-flex align-items-center mr-3" @click="toggleCommentShow">
+                                            <i class="far fa-comment-dots mr-2"></i>
+                                            <p class="mb-0">Comments</p>
+                                        </a>
 
-                                    <p class="mt-3 mb-4 pb-2" v-for="comment in post.comments">
-                                        {{ comment.comment }}
-                                    </p>
+                                    </div>
+
                                     <!-- form comment -->
-                                    <create-comment-form :url="route('admin.comment.store')"
-                                        :comment="getNewComment(post.id)" />
+                                    <div class="comment" v-if="showCommentFlag">
+                                        <create-comment-form :url="route('admin.comment.store')"
+                                            :comment="getNewComment(post.id)" />
+                                        <p class="mt-3 mb-4 pb-2" v-for="comment in post.comments">
+                                            {{ comment.comment }}
+                                        </p>
+                                    </div>
+
+
+
                                 </div>
 
                             </div>
@@ -137,3 +186,4 @@ function deletePost(postId:any) {
         </AdminLayout>
     </div>
 </template>
+<style></style>
