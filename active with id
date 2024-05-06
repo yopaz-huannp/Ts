@@ -7,3 +7,26 @@
           }
       }
    }
+
+
+
+
+ <div class="characters_default text-warning text-right">Zbývá 20 znaků</div>
+ <div class="characters_failed text-danger text-right d-none">Zbývá 0 znaků</div>
+
+
+const chatInput = document.querySelector(".chat__input");
+    const charactersDefault = $(".characters_default");
+    const charactersFailed = $(".characters_failed");
+
+    chatInput.addEventListener("input", function () {
+        const textLength = chatInput.value.length;
+        if (textLength > 1) {
+            charactersFailed.removeClass("d-none");
+            charactersDefault.addClass("d-none");
+        }
+        else {
+            charactersFailed.addClass("d-none");
+            charactersDefault.removeClass("d-none");
+        }
+    });
