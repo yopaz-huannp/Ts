@@ -1,0 +1,9 @@
+ const chatContent=$('.chat__content')
+ 
+   function flashChat(id) {
+      for(let i=0;i<chatContent.length;i++){
+          if(chatContent[i].getAttribute("id")==id){
+              chatContent[i].classList.toggle("active")
+          }
+      }
+   }
