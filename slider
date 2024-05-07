@@ -1,0 +1,43 @@
+ let slideIndex = 0;
+    const nextSlide = document.querySelector('.nextSlide');
+    const prevSlide = document.querySelector('.prevSlide');
+    function showSlide(index) {
+        const slides = document.querySelectorAll('.chat__end');
+        if (index >= slides.length) {
+            slideIndex = 0;
+        } else if (index < 0) {
+            slideIndex = slides.length - 1;
+        }
+
+        slides.forEach((slide, i) => {
+            slide.style.transform = `translateX(-${25 * slideIndex}%)`;
+            slide.style.transition = 'transform 0.3s ease-in-out';
+        });
+    }
+
+    prevSlide.addEventListener("click", function (event) {
+        if(slideIndex == 0) {
+            return false
+        }
+        else{
+            slideIndex--;
+            showSlide(slideIndex);
+        }
+    });
+    nextSlide.addEventListener("click", function (event) { 
+            slideIndex++;
+            showSlide(slideIndex);
+        
+    });
+
+    showSlide(slideIndex);
+
+    // toggle show details chat
+    const chatContent = document.querySelectorAll('.chat__content')
+    function flashChat(id) {
+        for (let i = 0; i < chatContent.length; i++) {
+            if (chatContent[i].getAttribute("id") == id) {
+                chatContent[i].classList.toggle("active")
+            }
+        }
+    }
