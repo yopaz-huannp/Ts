@@ -1,32 +1,69 @@
- const chatContent=$('.chat__content')
- 
-   function flashChat(id) {
-      for(let i=0;i<chatContent.length;i++){
-          if(chatContent[i].getAttribute("id")==id){
-              chatContent[i].classList.toggle("active")
-          }
-      }
-   }
+// move element to class app
 
+$(".app").append($(".chat__container"));
+// slider logic chat item
+let slideIndex = 0;
+function showSlide(index) {
+  var slides = $(".chat__list");
+  if (index >= slides.length) {
+    slideIndex = 0;
+  }
 
+  $(".chat__list").each(function () {
+    $(this).css("transform", `translateX(-${25 * slideIndex}%)`);
+    $(this).css("transition", "0.3s ease-in-out");
+  });
+}
 
+$(".prevSlide").on("click", function () {
+  if (slideIndex == 0) {
+    return false;
+  } else {
+    slideIndex--;
+    showSlide(slideIndex);
+  }
+});
+$(".nextSlide").on("click", function () {
+  slideIndex++;
+  showSlide(slideIndex);
+});
+showSlide(slideIndex);
 
- <div class="characters_default text-warning text-right">Zbývá 20 znaků</div>
- <div class="characters_failed text-danger text-right d-none">Zbývá 0 znaků</div>
+// toggle show details chat
 
+function flashChat(id) {
+  $(".chat__content").each(function () {
+    if ($(this).attr("id") == id) {
+      $(this).toggleClass("active");
+    }
+  });
+  $(".count__message").text(0);
+}
 
-const chatInput = document.querySelector(".chat__input");
-    const charactersDefault = $(".characters_default");
-    const charactersFailed = $(".characters_failed");
+// turn off chat
+function closeChat(id) {
+  $(`#${id}`).remove();
+  if ($(".chat__list").length == 0) {
+    $(".chat__navbar").addClass("d-none");
+  }
+}
 
-    chatInput.addEventListener("input", function () {
-        const textLength = chatInput.value.length;
-        if (textLength > 1) {
-            charactersFailed.removeClass("d-none");
-            charactersDefault.addClass("d-none");
-        }
-        else {
-            charactersFailed.addClass("d-none");
-            charactersDefault.removeClass("d-none");
-        }
-    });
+// validate chat character
+
+$(".chat__input").on("keyup", function () {
+  var counter = $(".counter").text(
+    $(this).attr("maxlength") - $(this).val().length
+  );
+  if ($(this).val().length < 16) {
+    $(".character").addClass("invisible");
+  } else {
+    $(".character").removeClass("invisible");
+  }
+  if ($(this).val().length == $(this).attr("maxlength")) {
+    $(".character").removeClass("text-warning");
+    $(".character").addClass("text-danger");
+  } else {
+    $(".character").removeClass("text-danger");
+    $(".character").addClass("text-warning");
+  }
+});
