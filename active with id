@@ -1,8 +1,9 @@
 // move element to class app
-
 $(".app").append($(".chat__container"));
+
 // slider logic chat item
 let slideIndex = 0;
+
 function showSlide(index) {
   var slides = $(".chat__list");
   if (index >= slides.length) {
@@ -43,27 +44,43 @@ function flashChat(id) {
 // turn off chat
 function closeChat(id) {
   $(`#${id}`).remove();
+  //$('.chat__list [data-id="' + id + '"]').remove()
   if ($(".chat__list").length == 0) {
-    $(".chat__navbar").addClass("d-none");
+    $(".chat__navbar").remove();
+    $(".close__allchat").remove();
   }
 }
 
-// validate chat character
+// close chat all
 
-$(".chat__input").on("keyup", function () {
-  var counter = $(".counter").text(
-    $(this).attr("maxlength") - $(this).val().length
-  );
-  if ($(this).val().length < 16) {
-    $(".character").addClass("invisible");
+$(".close__allchat").on("click", function () {
+  $(".chat__navbar").remove();
+  $(".chat__list").remove();
+  $(".close__allchat").remove();
+});
+
+// validate input chat characters
+const character = $(".character");
+const chatInput = $(".chat__input");
+chatInput.on("keyup", function () {
+  $(".counter").text(chatInput.attr("maxlength") - chatInput.val().length);
+  if (chatInput.val().length < 16) {
+    character.addClass("invisible");
   } else {
-    $(".character").removeClass("invisible");
+    character.removeClass("invisible");
   }
-  if ($(this).val().length == $(this).attr("maxlength")) {
-    $(".character").removeClass("text-warning");
-    $(".character").addClass("text-danger");
+  if (chatInput.val().length == chatInput.attr("maxlength")) {
+    character.removeClass("text-warning");
+    character.addClass("text-danger");
   } else {
-    $(".character").removeClass("text-danger");
-    $(".character").addClass("text-warning");
+    character.removeClass("text-danger");
+    character.addClass("text-warning");
   }
 });
+
+// check if content is overflowing
+if ($(".chat__box")[0].scrollWidth > $(".chat__box")[0].clientWidth) {
+  console.log("The content is overflowing.");
+} else {
+  console.log("The content fits within the box.");
+}
