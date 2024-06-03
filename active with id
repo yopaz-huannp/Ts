@@ -49,6 +49,7 @@ function closeChat(id) {
     $(".chat__navbar").remove();
     $(".close__allchat").remove();
   }
+  handleResize();
 }
 
 // close chat all
@@ -79,8 +80,25 @@ chatInput.on("keyup", function () {
 });
 
 // check if content is overflowing
-if ($(".chat__box")[0].scrollWidth > $(".chat__box")[0].clientWidth) {
-  console.log("The content is overflowing.");
-} else {
-  console.log("The content fits within the box.");
+function handleResize() {
+  if ($(".chat__box")[0].scrollWidth > $(".chat__box")[0].clientWidth) {
+    $(".chat__navbar").removeClass("d-none");
+  } else {
+    $(".chat__navbar").addClass("d-none");
+  }
 }
+$(document).ready(handleResize);
+$(window).on("resize", handleResize);
+
+// load more chat
+$(document).ready(function () {
+  $(".chat__message").scrollTop($(".chat__message")[0].scrollHeight);
+})
+$($(".message__list").slice(-6).get().reverse()).show();
+$(".chat__message").on("scroll", function () {
+  if ($(this).scrollTop() == 0) {
+    setTimeout(() => {
+      $(".message__list:hidden").slice(-6).slideDown();
+    }, 1000);
+  }
+});
