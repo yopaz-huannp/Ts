@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Repositories\User\Output;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
+use ModuleBase\Repositories\Output\OutputInterface;
+
+class UserWithRolePaginate implements OutputInterface
+{
+    private Builder $query;
+    private int $perPage;
+
+    /**
+     * @param  int  $perPage
+     */
+    public function __construct(int $perPage = 15)
+    {
+
+        $this->perPage = $perPage;
+    }
+
+    public function loadQuery(Builder $buildQuery): OutputInterface
+    {
+        $this->query = $buildQuery->with('roles');
+        return $this;
+    }
+
+    public function get()
+    {
+        $users = $this->query->paginate($this->perPage);
+        $users->getCollection()->transform(function ($user) {
+            $user->role = 'guest';
+            if (isset($user->roles[0]) && !empty($user->roles[0])) {
+                $user->role = $user->roles[0]->name;
+            }
+            $user->unsetRelation('roles');
+            return $user;
+        });
+        return $users;
+    }
+}
