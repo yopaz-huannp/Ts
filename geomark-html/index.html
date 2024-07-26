@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geomark UI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<style>
+    :root {
+        --btn-color: #4BCCBE;
+        --gray-color: #7C7C7C;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    body {
+        background: url('/image/launch_pc.jpg') no-repeat;
+        background-size: cover;
+        color: #7C7C7C;
+    }
+
+    .content-left {
+        background: #E6FCF5;
+        border-radius: 8px;
+        font-size: 13px;
+    }
+
+    .content-right {
+        font-size: 13px;
+    }
+
+    .btn-link {
+        background-color: var(--btn-color);
+        border-radius: 8px;
+        text-decoration: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 11px;
+    }
+
+    .title-link {
+        color: #7EA5A7;
+        font-size: 11px;
+    }
+
+    .qr {
+        background: #D9D9D9;
+        padding: 12px;
+    }
+
+    .prefecture {
+        background-color: transparent;
+        box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.2);
+        color: var(--gray-color);
+        padding: .7rem 10px;
+    }
+
+    .pro-plan {
+        background: #000000;
+        border-radius: 8px;
+        color: #fff;
+        padding: 4px 2rem;
+    }
+
+    .logo {
+        width: 251px;
+    }
+
+    .choose-map {
+        background: #D9D9D9;
+        height: 251px;
+    }
+
+    .btn-link:hover {
+        background: #D7D7D7;
+        transition: .3s linear;
+    }
+
+    .content-map {
+        height: 120px;
+    }
+
+    .img-profile {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        border: 1px solid #E2E2E2;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .managed-project {
+        background: #E6FCF5;
+    }
+
+    .border-radius {
+        border-radius: 8px;
+    }
+
+    .color-primary {
+        background-color: var(--btn-color);
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .family-account {
+        background: #E8E8E8;
+        padding: 8px 0px 8px 12px;
+        margin-left: 1.5rem;
+    }
+
+    .btn-remove {
+        background: #999999;
+    }
+
+    .border-radius-left {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+    .border-radius-top {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .border-radius-bottom {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .btn-remove:hover {
+        background: #D9D9D9;
+        transition: .3s linear;
+    }
+
+    select {
+        border: none;
+        outline: none;
+    }
+
+    .select-creator {
+        background: #6F6F6F;
+    }
+
+    .select-spot-manager {
+        background: #FDE7F3;
+        color: var(--gray-color);
+    }
+
+    .managed-header {
+        box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.2);
+        padding: 9px 16px;
+    }
+
+    .bg-pink {
+        background: #FDE7F3;
+    }
+
+    .bg-pink:hover {
+        background: #FCB4DA;
+        transition: .3s linear;
+    }
+</style>
+
+<body>
+    <!-- header -->
+    <header>
+        <div class="d-flex justify-content-center my-4">
+            <div class="logo">
+                <img src="./image/logo_gm_auth.png" alt="">
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+    <!-- content -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- content left -->
+            <div class="col-6">
+                <div class="content-left p-3">
+                    <div class="d-flex justify-content-between">
+                        <span>あなたのプロジェクト</span>
+                        <span class="btn-link px-4 py-1 text-white">新規プロジェクト作成</span>
+                    </div>
+                    <div class="my-3">
+                        <select class="w-100 prefecture border-radius">
+                            <option value="">西伊豆町</option>
+                        </select>
+                    </div>
+                    <!-- link and qr code -->
+                    <div class="row align-items-center bg-white py-2 rounded mt-3">
+                        <div class="col-4 border-radius">
+                            <img src="./image/GM_navigation.png" alt="">
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <div>
+                                    <sppan>URL</sppan>
+                                </div>
+                                <span>https://app.geomark.co.jp/Nishiizu</span>
+                            </div>
+                            <div class="my-3">
+                                <div><span>Plan</span></div>
+                                <span class="pro-plan">Pro Plan</span>
+                                <span class="title-link">プランを管理する</span>
+                            </div>
+                            <div>
+                                <div> <span>セッション数（1ヶ月）</span></div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="flex-grow-1 p-2 border border-radius">1,353</span>
+                                    <span class="title-link">ダッシュボードへ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 p-0">
+                            <div class="qr border-radius-left">
+                                <div class="d-flex justify-content-center">
+                                    <img src="./image/qr.png" alt="">
+                                </div>
+                                <div class="title-link text-center mt-2">QRコードダウンロード</div>
+                            </div>
+                            <div class="mt-2 color-primary p-2 text-center text-white border-radius-left btn-link">
+                                プロジェクトを編集する
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--and link and qr code -->
+
+                    <!-- list iten map -->
+                    <div class="row mt-3 align-items-center">
+                        <div class="col-3 px-1">
+                            <div class="bg-white p-2">
+                                <div class="d-flex justify-content-center mt-4">
+                                    <img src="./image/engine_logo.png" alt="">
+                                </div>
+                                <div class="content-map">
+                                    <p class="mt-4">オリジナルデジタルマップの制作管理ツールです</p>
+                                </div>
+                                <p class="text-center">pro planで利用中</p>
+                                <div class="btn-link text-white text-center mt-2 mb-4 py-2">サービスへ移動</div>
+                            </div>
+                            <div class="choose-map p-2">
+                                <p class="text-center text-white">オプション</p>
+                                <div class="btn-link bg-white text-dark text-center mt-2 mb-4 py-2">SUPER路線図（３路線）</div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-1">
+                            <div class="bg-white p-2">
+                                <div class="d-flex justify-content-center mt-4">
+                                    <img src="./image/wiki-logo.png" alt="">
+                                </div>
+                                <div class="content-map">
+                                    <p class="mt-4">スポット情報の管理データベースです</p>
+                                </div>
+                                <p class="text-center">pro planで利用中</p>
+                                <div class="btn-link text-white text-center mt-2 mb-4 py-2">サービスへ移動</div>
+                            </div>
+                            <div class="choose-map p-2">
+                                <p class="text-center text-white">オプション</p>
+                                <div class="btn-link bg-white text-dark text-center mt-2 mb-4 py-2">AI翻訳機能</div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-1">
+                            <div class="bg-white p-2">
+                                <div class="d-flex justify-content-center mt-4">
+                                    <img src="./image/GM_creater.png" alt="">
+                                </div>
+                                <div class="content-map">
+                                    <p class="mt-4">マップを使ったクエスト体験イベントを作るツールです</p>
+                                </div>
+                                <p class="text-center">pro planで利用中</p>
+                                <div class="btn-link text-white text-center mt-2 mb-4 py-2">サービスへ移動</div>
+                            </div>
+                            <div class="choose-map p-2">
+                                <p class="text-center text-white">オプション</p>
+                                <div class="btn-link bg-white text-dark text-center mt-2 mb-4 py-2">NFT利用申請</div>
+                            </div>
+                        </div>
+                        <div class="col-3 px-1">
+                            <div class="bg-white p-2">
+                                <div class="d-flex justify-content-center mt-4">
+                                    <img src="./image/GM_manager.png" alt="">
+                                </div>
+                                <div class="content-map">
+                                    <p class="mt-4">路線情報を地図に表示するバス情報管理ツールです</p>
+                                </div>
+                                <p class="text-center">オプションを追加する必要があります</p>
+                                <div class="btn-link text-white text-center mt-2 mb-4 py-2">サービスへ移動</div>
+                            </div>
+                            <div class="choose-map p-2">
+                                <p class="text-center text-white">オプション</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end list iten map -->
+                </div>
+            </div>
+            <!-- end content left -->
+
+            <!-- content right -->
+            <div class="col-6 content-right">
+                <div class="bg-white border-radius-top p-3">
+                    <p>プロフィール</p>
+                    <div class="img-profile">
+                        <img src="./image/avatar.jpeg" alt="">
+                    </div>
+                    <div class="mt-4 px-5">
+                        <div class="border-bottom row pb-2">
+                            <div class="col-3">
+                                <span>ユーザー名</span>
+                            </div>
+                            <div class="col-9">
+                                <span>map-create-girl</span>
+                            </div>
+                        </div>
+                        <div class="border-bottom row pb-2 mt-4">
+                            <div class="col-3">
+                                <span>メールアドレス</span>
+                            </div>
+                            <div class="col-9">
+                                <span>abcdefg.hijk@gmai.com</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-3">
+                            <span class="title-link">プロフィール編集</span>
+                            <span class="title-link float-end mt-1">パスワード変更</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- managed project -->
+                <div class="managed-project p-3 border-radius-bottom">
+                    <span>管理プロジェクト一覧</span>
+                    <div class="managed-header border-radius mt-2">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                西伊豆町
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="bg-dark text-white text-center border-radius cursor-pointer py-1">
+                                            Pro Plan
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div
+                                            class="text-white text-center border-radius color-primary cursor-pointer py-1">
+                                            クリエーター</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Family Account -->
+                    <div class="family-account mt-1">
+                        <div class="d-flex justify-content-between my-2">
+                            <span>ファミリーアカウント</span>
+                            <span class="title-link">＋ アカウントを追加する</span>
+                        </div>
+                        <div class="row align-items-center my-3">
+                            <div class="col-7">
+                                <div class="bg-white border-radius py-1 px-3">
+                                    <span>hanako.test01@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <select class="border-radius py-1 px-3 select-creator text-white w-100">
+                                            <option value="">サブクリエーター</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="btn-remove border-radius-left text-white py-1 px-3">
+                                            <span>削除</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center my-3">
+                            <div class="col-7">
+                                <div class="bg-white border-radius py-1 px-3">
+                                    <span>hanako.test01@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <div class="bg-pink border-radius py-1 px-3">
+                                            <span>担当営業管理者</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="btn-remove border-radius-left text-white py-1 px-3">
+                                            <span>削除</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center my-3">
+                            <div class="col-7">
+                                <div class="bg-white border-radius py-1 px-3">
+                                    <span>hanako.test01@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <select class="border-radius py-1 px-3 select-spot-manager w-100">
+                                            <option value="">スポット管理者</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="btn-remove border-radius-left text-white py-1 px-3">
+                                            <span>削除</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center my-3">
+                            <div class="col-7">
+                                <div class="bg-white border-radius py-1 px-3">
+                                    <span>hanako.test01@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <select class="border-radius py-1 px-3 select-spot-manager w-100">
+                                            <option value="">スポット管理者</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="btn-remove border-radius-left text-white py-1 px-3">
+                                            <span>削除</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-2 d-flex justify-content-end">
+                            <span class="border-radius py-1 px-5 text-white color-primary">決定</span>
+                        </div>
+                    </div>
+
+                    <!-- project-->
+
+                    <div class="py-3">参加プロジェクト</div>
+                    <div class="managed-header border-radius">
+                        <div class="row align-items-center">
+                            <div class="col-7">
+                                <span>下田観光協会</span>
+                            </div>
+                            <div class="col-5">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <div class="bg-pink border-radius py-1 px-3 text-center">
+                                            スポット管理者
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="text-white py-1 px-2 color-primary border-radius text-center">
+                                            <span>移動</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end content right -->
+        </div>
+    </div>
+    <!-- end header -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
