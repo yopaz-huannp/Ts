@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input[type="radio"] {
+        appearance: none;
+    }
+
+    input:checked[type="radio"] {
+        width: 13px;
+        height: 20px;
+        border: 2px solid red;
+        border-bottom: 0;
+        border-right: 0;
+        transform: rotateZ(210deg);
+    }
+</style>
+
+<body>
+    <input type="radio" name="ok" id="test">
+    <label for="test">click1</label>
+    <input type="radio" name="ok" id="test2">
+    <label for="test2">click2</label>
+
+    <script>
+        const getInitials = (name) => {
+            let parts = name.split(" ");
+            return parts[0].charAt(0);
+        }
+    </script>
+</body>
+
+</html>
