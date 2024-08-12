@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <style>
-    input[type="radio"] {
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    /* input[type="radio"] {
         appearance: none;
     }
 
@@ -18,15 +24,31 @@
         border-bottom: 0;
         border-right: 0;
         transform: rotateZ(210deg);
+    } */
+    .bg{
+        width: 100%;
+        height: 200px;
+        background: #f79a30 no-repeat;
     }
 </style>
 
 <body>
+    <label>
+        <div class="flex">
+            <input type="radio" name="option" id="option3" class="peer hidden" />
+            <label for="option3" >click</label>
+            <div class="peer-checked:block hidden peer-checked:text-red-200">check</div>
+        </div>
+        <div class="flex">
+            <input type="radio" name="option" id="option4" class="peer hidden" />
+            <label for="option4" >click</label>
+            <div class="peer-checked:block hidden peer-checked:text-red-200">check</div>
+        </div>
+    </label>
     <input type="radio" name="ok" id="test">
     <label for="test">click1</label>
     <input type="radio" name="ok" id="test2">
     <label for="test2">click2</label>
-
     <script>
         const getInitials = (name) => {
             let parts = name.split(" ");
