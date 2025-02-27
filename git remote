@@ -1,0 +1,16 @@
+git remote -v
+git remote remove origin
+git remote add origin <URL_REPO_MỚI>
+git branch -M main  # Đảm bảo branch chính là `main`
+git push -u origin main
+
+
+ssh web2-dev
+docker ps | grep engine
+docker exec -it geomark_engine_server sh
+cat .env
+
+
+
+git log task123 --oneline
+git cherry-pick a1b2c3d
