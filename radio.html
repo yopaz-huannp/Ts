@@ -49,6 +49,15 @@
     <label for="test">click1</label>
     <input type="radio" name="ok" id="test2">
     <label for="test2">click2</label>
+    <div v-for="option in options" class="flex items-center gap-x-[7px]">
+                                        <input type="radio" name="filter" :id="option.title" class="peer hidden">
+                                        <label :for="option.title" class="w-[18px] h-[18px] border-[1px]
+                            border-solid border-[#D9D9D9] rounded-full flex items-center justify-center peer-checked:border-[#00C58D]
+                            relative before:w-[14px] before:h-[14px] before:rounded-full before:bg-[#fff] before:content-['']
+                            before:absolute peer-checked:before:bg-[#00C58D]">
+                                        </label>
+                                        <span>{{ option.title }}</span>
+                                    </div>
     <script>
         const getInitials = (name) => {
             let parts = name.split(" ");
