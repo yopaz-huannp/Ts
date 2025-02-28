@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .checkbox-remember[type="checkbox"] {
+            border: 1px solid #00C58D;
+            width: 18px;
+            height: 18px;
+            appearance: none;
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .checkbox-remember[type="checkbox"]:checked {
+            background-color: #00C58D;
+            border-color: #00C58D;
+        }
+
+        .checkbox-remember[type="checkbox"]:checked::after {
+            content: '✔';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<input type="checkbox" name="" id="" class="checkbox-remember">
+</body>
+
+</html>
